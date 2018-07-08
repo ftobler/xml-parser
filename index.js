@@ -76,7 +76,22 @@ function parse(xml) {
     var node = {
       name: m[1],
       attributes: {},
-      children: []
+      children: [],
+      getChild: function (name) {
+        for (var i = 0; i < this.children.length; i++) {
+          if (this.children[i].name === name) {
+            return this.children[i];
+          }
+        }
+        return null;
+      },
+      getMatching: function(name, cb) {
+        for (var i = 0; i < this.children.length; i++) {
+          if (this.children[i].name === name) {
+            cb(this.children[i]);
+          }
+        }
+      }
     };
 
     // attributes
